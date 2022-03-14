@@ -92,13 +92,13 @@ export default function Home(){
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  await client.query(GetAllPokemonsDocument).toPromise()
-  await client.query(GetTypesRelationsDocument).toPromise()
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   await client.query(GetAllPokemonsDocument).toPromise()
+//   await client.query(GetTypesRelationsDocument).toPromise()
 
-  return {
-    props: {
-      urqState: ssrCache.extractData()
-    }
-  }
-}
+//   return {
+//     props: {
+//       urqState: ssrCache.extractData()
+//     }
+//   }
+// }
