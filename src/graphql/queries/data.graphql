@@ -1,0 +1,79 @@
+
+query getAllPokemons {
+  pokemon_v2_pokemon: pokemon_v2_pokemon(where: {id: {_lte: 478}}) {
+    id
+    name
+    pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        id
+        name
+      }
+    }
+    pokemon_v2_pokemonstats {
+      base_stat
+      pokemon_v2_stat {
+        name
+      }
+    }
+    order
+    pokemon_v2_pokemonspecy {
+      pokemon_v2_evolutionchain {
+        pokemon_v2_pokemonspecies {
+          name
+          id
+          order
+        }
+      }
+    }
+    pokemon_v2_pokemonabilities {
+      pokemon_v2_ability {
+        name
+        id
+      }
+    }
+    pokemon_v2_pokemonmoves {
+      pokemon_v2_move {
+        accuracy
+        id
+        name
+        power
+        pp
+        priority
+        pokemon_v2_type {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+
+query getPokemonList {
+  pokemon_v2_pokemon: pokemon_v2_pokemon(where: {id: {_lte: 478}}) {
+    id
+    name
+    pokemon_v2_pokemontypes {
+      pokemon_v2_type {
+        id
+        name
+      }
+    }
+  }
+}
+
+query getTypesRelations {
+  pokemon_v2_type {
+    id
+    name
+    pokemon_v2_typeefficacies {
+      damage_factor
+      pokemonV2TypeByTargetTypeId {
+        name
+        id
+      }
+    }
+  }
+}
+
+
+# https://cdn.statically.io/gh/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/3.gif

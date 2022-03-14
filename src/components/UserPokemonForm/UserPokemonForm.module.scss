@@ -1,0 +1,222 @@
+
+.container{
+    background-color: #fefefe;
+    border-radius: 10px;
+    border: 2px solid #d4d4d4;
+    padding: .3rem 1rem 1rem 1rem;
+    margin: .5rem .2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    >span{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        margin-bottom: .3rem;
+
+        .back{
+            color: #727272;
+            border-radius: 50%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            transition: .3s;
+            display: grid;
+            place-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            
+            &:hover{
+                color: #3d3d3d;
+                background-color: #a1a1a16c;
+            }
+        }
+
+        .next{
+            background-color: #f08030;
+            color: #fefefe;
+            border-radius: 5rem;
+            padding: .5rem 1rem;
+            font-weight: bold;
+            transition: .3s;
+            cursor: pointer;
+
+            &:hover{
+                filter: brightness(1.3);
+            }
+        }
+    }
+
+    >input{
+        outline: none;
+        width: 100%;
+        border: 2px solid #dedede;
+        padding: .5rem;
+        border-radius: 5px;
+        font-weight: bolder;
+        color: #333;
+    }
+
+    >ul{
+        overflow-y: auto;
+        flex: 1;
+
+        >li{
+            height: 15vh;
+            min-height: 5rem;
+            width: 25vw;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            place-items: center;
+            border: 2px solid #dedede;
+            border-radius: 5px;
+            padding: 0 1rem;
+            margin: .5rem .2rem .5rem 0;
+            transition: .3s;
+            cursor: pointer;
+            overflow: hidden;
+
+            &:hover{
+                transform: scale(.95);
+                border: 2px solid #78c850;
+            }
+
+            &:active{
+                transform: scale(1);
+                border: 2px solid #f08030;
+            }
+
+            >h4{
+                grid-area: 1 / 1 / 2 / 2;
+                margin-right: auto;
+                color: #444;
+            }
+
+            >h3{
+                grid-area: 2 / 1 / 3 / 2;
+                text-transform: capitalize;
+                word-break: keep-all;
+                margin-bottom: auto;
+                color: #444;
+            }
+
+            >span{
+                grid-area: 1 / 2 / 3 / 3;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0 .5rem;
+
+                >b{
+                    padding: .3rem .8rem;
+                    border-radius: 50rem;
+                    margin-bottom: .3rem;
+                    text-transform: capitalize;
+                    font-size: .9rem;
+                }
+            }
+
+            >img{
+                grid-area: 1 / 3 / 3 / 4;
+                height: 100%;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    }
+}
+
+.hide{
+    opacity: 0;
+  }
+
+.poison{
+    color: #fefefe;
+    background-color: #a040a0;
+}
+
+.grass{
+    color: #fefefe;
+    background-color: #78c850;
+}
+
+.fire{
+    color: #fefefe;
+    background-color: #f08030;
+}
+
+.flying{
+    color: #fefefe;
+    background-color: #a890f0;
+}
+
+.water{
+    color: #fefefe;
+    background-color: #6890f0;
+}
+
+.fighting{
+    color: #fefefe;
+    background-color: #c03028;
+}
+
+.bug{
+    color: #fefefe;
+    background-color: #a8b820;
+}
+
+.normal{
+    color: #fefefe;
+    background-color: #a8a878;
+}
+
+.rock{
+    color: #fefefe;
+    background-color: #b8a038;
+}
+
+.ground{
+    color: #fefefe;
+    background-color: #e0c068;
+}
+
+.steel{
+    color: #fefefe;
+    background-color: #b8b8d0;
+}
+
+.electric{
+    color: #fefefe;
+    background-color: #f8d030;
+}
+
+.ice{
+    color: #fefefe;
+    background-color: #98d8d8;
+}
+
+.psychic{
+    color: #fefefe;
+    background-color: #f85888;
+}
+
+.ghost{
+    color: #fefefe;
+    background-color: #705898;
+}
+
+.dragon{
+    color: #fefefe;
+    background-color: #7038f8;
+}
+
+.fairy{
+    color: #fefefe;
+    background-color: #f0b6bc;
+}
+
+.dark{
+    color: #fefefe;
+    background-color: #705848;
+}
