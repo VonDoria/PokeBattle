@@ -38,31 +38,42 @@ export function UserPokemonContextProvider(props: UserPokemonContextProviderProp
                 favoriteIdList.push(pokemonId);
             }
             localStorage.setItem('favorite', JSON.stringify(favoriteIdList));
-        }else{
-            localStorage.setItem('favorite', JSON.stringify([pokemonId]));
         }
         setTrigger(!trigger);
     }
 
     function isFavorite(pokemonId?: number){
-        let favoriteIdString = localStorage.getItem('favorite');
-        if(favoriteIdString){
-            let favoriteIdList: number[] = JSON.parse(favoriteIdString);
-            return !!favoriteIdList.find(id => id === pokemonId);
-        }else{
-            localStorage.setItem('favorite', JSON.stringify([pokemonId]));
+        if (typeof window !== 'undefined'){
+            let favoriteIdString = localStorage.getItem('favorite');
+            if(favoriteIdString){
+                let favoriteIdList: number[] = JSON.parse(favoriteIdString);
+                return !!favoriteIdList.find(id => id === pokemonId);
+            }
+            return false;
         }
-        return false;
     }
 
     function favoriteList(){
-        let favoriteIdString = localStorage.getItem('favorite');
-        if(favoriteIdString){
-            let favoriteIdList: number[] = JSON.parse(favoriteIdString);
-            return favoriteIdList;
+        if (typeof window !== 'undefined'){
+            let favoriteIdString = localStorage.getItem('favorite');
+            if(favoriteIdString){
+                let favoriteIdList: number[] = JSON.parse(favoriteIdString);
+                return favoriteIdList;
+            }
+            return [];
         }
-        return [];
     }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined'){
+            let favoriteIdString = localStorage.getItem('favorite');
+            if(!favoriteIdString){
+                localStorage.setItem('favorite', '');
+                favoriteIdString = '[]';
+                localStorage.setItem('favorite', favoriteIdString);
+            }
+        }
+    }, [])
 
     return (
         <UserPokemonContext.Provider value={{
