@@ -38,6 +38,8 @@ export function UserPokemonContextProvider(props: UserPokemonContextProviderProp
                 favoriteIdList.push(pokemonId);
             }
             localStorage.setItem('favorite', JSON.stringify(favoriteIdList));
+        }else{
+            localStorage.setItem('favorite', JSON.stringify([pokemonId]));
         }
         setTrigger(!trigger);
     }
@@ -47,6 +49,8 @@ export function UserPokemonContextProvider(props: UserPokemonContextProviderProp
         if(favoriteIdString){
             let favoriteIdList: number[] = JSON.parse(favoriteIdString);
             return !!favoriteIdList.find(id => id === pokemonId);
+        }else{
+            localStorage.setItem('favorite', JSON.stringify([pokemonId]));
         }
         return false;
     }
@@ -59,15 +63,6 @@ export function UserPokemonContextProvider(props: UserPokemonContextProviderProp
         }
         return [];
     }
-
-    useEffect(() => {
-        let favoriteIdString = localStorage.getItem('favorite');
-        if(!favoriteIdString){
-            localStorage.setItem('favorite', '');
-            favoriteIdString = '[]';
-            localStorage.setItem('favorite', favoriteIdString);
-        }
-    }, [])
 
     return (
         <UserPokemonContext.Provider value={{
