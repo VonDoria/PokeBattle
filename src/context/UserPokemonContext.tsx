@@ -29,17 +29,19 @@ export function UserPokemonContextProvider(props: UserPokemonContextProviderProp
     const [trigger, setTrigger] = useState<boolean>(false);
 
     function favorite(pokemonId: number){
-        let favoriteIdString = localStorage.getItem('favorite');
-        if(favoriteIdString){
-            let favoriteIdList: number[] = JSON.parse(favoriteIdString);
+        if (typeof window !== 'undefined'){
+            let favoriteIdString = localStorage.getItem('favorite');
+            if(favoriteIdString){
+                let favoriteIdList: number[] = JSON.parse(favoriteIdString);
             if(favoriteIdList.find(id => id === pokemonId)){
                 favoriteIdList = favoriteIdList.filter(id => id !== pokemonId);
             }else{
                 favoriteIdList.push(pokemonId);
             }
-            localStorage.setItem('favorite', JSON.stringify(favoriteIdList));
+                localStorage.setItem('favorite', JSON.stringify(favoriteIdList));
+            }
+            setTrigger(!trigger);
         }
-        setTrigger(!trigger);
     }
 
     function isFavorite(pokemonId?: number){
@@ -49,8 +51,8 @@ export function UserPokemonContextProvider(props: UserPokemonContextProviderProp
                 let favoriteIdList: number[] = JSON.parse(favoriteIdString);
                 return !!favoriteIdList.find(id => id === pokemonId);
             }
-            return false;
         }
+        return false;
     }
 
     function favoriteList(){
@@ -60,8 +62,8 @@ export function UserPokemonContextProvider(props: UserPokemonContextProviderProp
                 let favoriteIdList: number[] = JSON.parse(favoriteIdString);
                 return favoriteIdList;
             }
-            return [];
         }
+        return [];
     }
 
     useEffect(() => {
