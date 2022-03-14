@@ -36,7 +36,7 @@ export default function UserPokemonForm(){
                 <p className={styles.back}>
                     <Link href="/"><FaArrowLeft /></Link>
                 </p>
-                <p className={`${styles.next} ${team?.length !== 3 && styles.hide}`}>
+                <p className={`${styles.next} ${team?.length !== teamNumber && styles.hide}`}>
                     <Link href="/">Go to battle!</Link>
                 </p>
             </span>

@@ -45,6 +45,25 @@
         }
     }
 
+    .typeRelation{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 .5rem;
+
+        >p{
+            margin-bottom: 1rem;
+        }
+
+        >b{
+            padding: .3rem .8rem;
+            border-radius: 50rem;
+            text-transform: capitalize;
+            margin: .3rem;
+            font-size: .9rem;
+        }
+    }
+
     .status{
         margin: 0 1rem;
 
@@ -76,6 +95,13 @@
                 }
             }
         }
+    }
+
+    .favorite{
+        color: #f8d030;
+        margin-bottom: auto;
+        font-size: 1.5rem;
+        cursor: pointer;
     }
 }
 

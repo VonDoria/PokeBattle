@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { GiBroadsword, GiRosaShield } from "react-icons/gi";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { BsHeart, BsShield } from "react-icons/bs";
 import { BiRun } from "react-icons/bi";
 import { RiSwordLine } from "react-icons/ri";
@@ -10,12 +11,12 @@ import { DataContext } from '../../context/DataContext';
 
 type UserPokemonCardComponentType = {
     pokemon: Pokemon;
-    cardId: number;
+    cardId?: number;
 }
 
 export default function UserPokemonCard({ pokemon, cardId }: UserPokemonCardComponentType){
 
-    const { focus, setFocus } = useContext(UserPokemonContext);
+    const { focus, setFocus, teamNumber, team, favorite, isFavorite } = useContext(UserPokemonContext);
     const { typeRelations } = useContext(DataContext);
     
     function statusIcon(status?: string){
@@ -38,7 +39,6 @@ export default function UserPokemonCard({ pokemon, cardId }: UserPokemonCardComp
     function resistance(){
         const pokemonTypeId = pokemon.type.map(pt => pt.id);
         let resistance: string[] = [];
-        let weakness: string[] = [];
 
         // ----------------------------- retorna os tipos ao qual o attack é pouco eficaz ---------------------------------------
         // let pokemonTypeRalation = typeRelations.filter(t => pokemonTypeId.includes(t.id));
@@ -53,25 +53,23 @@ export default function UserPokemonCard({ pokemon, cardId }: UserPokemonCardComp
             
         });
 
+        return resistance.filter((v, i, a) => a.indexOf(v) === i).map((type, index) => <b className={styles[type]} key={`resistance_${index}`}>{type}</b>)
+    }
+
+    function weakness(){
+        const pokemonTypeId = pokemon.type.map(pt => pt.id);
+        let weakness: string[] = [];
+
         typeRelations.map(t => {
             pokemonTypeId.map(pt => t.relations?.map(r => (r.id === pt && r.damageFactor > 100 && r.name) && weakness.push(t.name)))
             
         });
 
-        return (
-            <>
-                {JSON.stringify(resistance.filter((v, i, a) => a.indexOf(v) === i))}
-                {JSON.stringify(weakness.filter((v, i, a) => a.indexOf(v) === i))}
-            </>
-        );
-    }
-
-    function weakness(){
-        
+        return weakness.filter((v, i, a) => a.indexOf(v) === i).map((type, index) => <b className={styles[type]} key={`weakness_${index}`}>{type}</b>)
     }
 
     return (
-        <span onClick={() => setFocus(cardId)} className={`${styles.container} ${cardId === focus && styles.focus}`}>
+        <span onClick={() => (team?.length === teamNumber && cardId) && setFocus(cardId)} className={`${styles.container} ${cardId === focus && styles.focus}`}>
             <div className={styles.name}>
                 <img alt={pokemon.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}/>
                 <p>{pokemon.name}</p>
@@ -97,10 +95,14 @@ export default function UserPokemonCard({ pokemon, cardId }: UserPokemonCardComp
                     )
                 })}
             </div>
-            {/* <div>
-                <p>Weakness</p>
+            <div onClick={() => favorite(pokemon.id)} className={styles.favorite}>
+                {isFavorite(pokemon.id) ? <AiFillStar /> : <AiOutlineStar />}
             </div>
-            <div>
+            {/* <div className={styles.typeRelation}>
+                <p>Weakness</p>
+                {weakness()}
+            </div>
+            <div className={styles.typeRelation}>
                 <p>Resistance</p>
                 {resistance()}
             </div> */}

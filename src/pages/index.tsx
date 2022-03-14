@@ -5,6 +5,7 @@ import { DataContext } from '../context/DataContext';
 import { useGetAllPokemonsQuery, GetAllPokemonsDocument, useGetTypesRelationsQuery, GetTypesRelationsDocument } from '../generated/graphql'
 import { client, ssrCache } from '../lib/urql'
 import { Pokemon, TypeRelations } from '../types/PokemonTypes';
+import styles from '../styles/Home.module.scss';
 
 
 export default function Home(){  
@@ -85,9 +86,14 @@ export default function Home(){
   }, [typeRelationList])
 
   return (
-    <div>
+    <div className={styles.container}>
       Home page
-      {pokemonList && <Link href="/TeamSelect">TeamSelect</Link>}
+      {pokemonList ? (
+        <span>
+          <Link href="/TeamSelect">TeamSelect</Link>
+          <Link href="/FavoriteList">Favorite</Link>
+        </span>
+      ) : <img alt='loading' src='../../public/pokeloading.png' />}
     </div>
   )
 }
