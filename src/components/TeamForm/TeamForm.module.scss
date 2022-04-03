@@ -1,0 +1,126 @@
+
+.container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .teamNames{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        max-height: 10vh;
+        overflow-x: auto;
+        
+        >span{
+            height: min-content;
+            display: flex;
+            align-items: center;
+            background-color: #dedede;
+            color: #464646;
+            border-radius: 5rem;
+            padding: .2rem .5rem;
+            margin: .3rem;
+            transition: .3s;
+            cursor: pointer;
+
+            &:hover{
+                box-shadow: 0px 0px 0px 2px #2f2f2f;
+            }
+            
+            >button{
+                border: none;
+                background-color: transparent;
+                display: grid;
+                place-items: bottom;
+                margin-left: .3rem;
+                color: #ababab;
+                transition: .3s;
+                cursor: pointer;
+                
+                &:hover{
+                    color: #2f2f2f;
+                }
+            }
+        }
+    }
+
+    .pokemons{
+        display: flex;
+        flex-direction: column;
+        padding: .5rem;
+
+        >input{
+            flex: 1;
+            outline: none;
+            border: 2px solid #dedede;
+            padding: .2rem;
+            border-radius: 5px;
+            font-weight: bolder;
+            color: #333;
+            margin-bottom: .5rem;
+        }
+
+        >span{
+            margin: .3rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 3px solid #dfdfdf;
+            border-radius: 8px;
+            padding: .5rem;
+            transition: .3s;
+            cursor: pointer;
+
+            >img{
+                height: 3rem;
+            }
+
+            >b{
+                text-transform: capitalize;
+                color: #646464;
+            }
+
+            >button{
+                border: none;
+                background-color: transparent;
+                padding: 0 .3rem;
+                border-left: 1px solid #dedede;
+                display: grid;
+                place-items: center;
+                color: #dedede;
+                transition: .3s;
+                cursor: pointer;
+
+            }
+
+            .add{
+                background-color: #359b2c;
+                font-weight: bold;
+                border-radius: 5rem;
+                padding: .2rem .5rem;
+
+                &:hover{
+                    filter: brightness(1.2);
+                }
+            }
+
+            .remove{
+                height: 100%;
+
+                &:hover{
+                    border-left: 1px solid #a8a8a8;
+                    color: #a8a8a8;
+                }
+            }
+
+            &:hover{
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
+.active{
+    border: 3px solid #359b2c !important;
+}

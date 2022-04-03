@@ -4,6 +4,10 @@
     place-items: center;
     height: 100vh;
     padding: 2rem 0;
+
+    >img{
+        animation: spiring 2s infinite;
+    }
     
     >span{
         display: flex;
@@ -27,5 +31,11 @@
                 box-shadow: none;
             }
         }
+    }
+}
+
+@keyframes spiring{
+    100%{
+        transform: rotate(360deg);
     }
 }

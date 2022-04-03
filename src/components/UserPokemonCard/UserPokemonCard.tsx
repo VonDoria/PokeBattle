@@ -74,7 +74,7 @@ export default function UserPokemonCard({ pokemon, cardId }: UserPokemonCardComp
                 <img alt={pokemon.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}/>
                 <p>{pokemon.name}</p>
                 <span>
-                    {pokemon.type.map((t, i) => <b key={`card_type_${pokemon.id}_${i}`} className={t.name && styles[t.name]}>{t.name}</b>)}
+                    {pokemon.type.map((t, i) => <p key={`card_type_${pokemon.id}_${i}`} className={t.name && styles[t.name]}>{t.name}</p>)}
                 </span>
             </div>
             <div className={styles.status}>

@@ -51716,15 +51716,24 @@ export type Subscription_RootPokemon_V2_Versionname_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type GetAllPokemonsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetAllPokemonsQuery = { __typename?: 'query_root', pokemon_v2_pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: number | null, pokemon_v2_pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', pokemon_v2_type?: { __typename?: 'pokemon_v2_type', id: number, name: string } | null }>, pokemon_v2_pokemonstats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, pokemon_v2_stat?: { __typename?: 'pokemon_v2_stat', name: string } | null }>, pokemon_v2_pokemonspecy?: { __typename?: 'pokemon_v2_pokemonspecies', pokemon_v2_evolutionchain?: { __typename?: 'pokemon_v2_evolutionchain', pokemon_v2_pokemonspecies: Array<{ __typename?: 'pokemon_v2_pokemonspecies', name: string, id: number, order?: number | null }> } | null } | null, pokemon_v2_pokemonabilities: Array<{ __typename?: 'pokemon_v2_pokemonability', pokemon_v2_ability?: { __typename?: 'pokemon_v2_ability', name: string, id: number } | null }>, pokemon_v2_pokemonmoves: Array<{ __typename?: 'pokemon_v2_pokemonmove', pokemon_v2_move?: { __typename?: 'pokemon_v2_move', accuracy?: number | null, id: number, name: string, power?: number | null, pp?: number | null, priority?: number | null, pokemon_v2_type?: { __typename?: 'pokemon_v2_type', id: number, name: string } | null } | null }> }> };
-
 export type GetPokemonListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPokemonListQuery = { __typename?: 'query_root', pokemon_v2_pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, pokemon_v2_pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', pokemon_v2_type?: { __typename?: 'pokemon_v2_type', id: number, name: string } | null }> }> };
+export type GetPokemonListQuery = { __typename?: 'query_root', pokemon_v2_pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, pokemon_v2_pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', pokemon_v2_type?: { __typename?: 'pokemon_v2_type', id: number, name: string } | null }>, pokemon_v2_pokemonstats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, pokemon_v2_stat?: { __typename?: 'pokemon_v2_stat', name: string } | null }>, pokemon_v2_pokemonabilities: Array<{ __typename?: 'pokemon_v2_pokemonability', pokemon_v2_ability?: { __typename?: 'pokemon_v2_ability', name: string, id: number } | null }> }> };
+
+export type GetPokemonMovesQueryVariables = Exact<{
+  pokemonId?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetPokemonMovesQuery = { __typename?: 'query_root', pokemon_v2_move: Array<{ __typename?: 'pokemon_v2_move', name: string, id: number, accuracy?: number | null, power?: number | null, pp?: number | null, priority?: number | null, pokemon_v2_type?: { __typename?: 'pokemon_v2_type', name: string, id: number } | null }> };
+
+export type GetPokemonEvolutionsQueryVariables = Exact<{
+  pokemonId?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetPokemonEvolutionsQuery = { __typename?: 'query_root', pokemon_v2_pokemonspecies: Array<{ __typename?: 'pokemon_v2_pokemonspecies', pokemon_v2_evolutionchain?: { __typename?: 'pokemon_v2_evolutionchain', pokemon_v2_pokemonspecies: Array<{ __typename?: 'pokemon_v2_pokemonspecies', name: string, id: number, pokemon_v2_pokemons: Array<{ __typename?: 'pokemon_v2_pokemon', pokemon_v2_pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', pokemon_v2_type?: { __typename?: 'pokemon_v2_type', name: string, id: number } | null }> }> }> } | null }> };
 
 export type GetTypesRelationsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -51732,8 +51741,8 @@ export type GetTypesRelationsQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetTypesRelationsQuery = { __typename?: 'query_root', pokemon_v2_type: Array<{ __typename?: 'pokemon_v2_type', id: number, name: string, pokemon_v2_typeefficacies: Array<{ __typename?: 'pokemon_v2_typeefficacy', damage_factor: number, pokemonV2TypeByTargetTypeId?: { __typename?: 'pokemon_v2_type', name: string, id: number } | null }> }> };
 
 
-export const GetAllPokemonsDocument = gql`
-    query getAllPokemons {
+export const GetPokemonListDocument = gql`
+    query getPokemonList {
   pokemon_v2_pokemon: pokemon_v2_pokemon(where: {id: {_lte: 478}}) {
     id
     name
@@ -51749,52 +51758,10 @@ export const GetAllPokemonsDocument = gql`
         name
       }
     }
-    order
-    pokemon_v2_pokemonspecy {
-      pokemon_v2_evolutionchain {
-        pokemon_v2_pokemonspecies {
-          name
-          id
-          order
-        }
-      }
-    }
     pokemon_v2_pokemonabilities {
       pokemon_v2_ability {
         name
         id
-      }
-    }
-    pokemon_v2_pokemonmoves {
-      pokemon_v2_move {
-        accuracy
-        id
-        name
-        power
-        pp
-        priority
-        pokemon_v2_type {
-          id
-          name
-        }
-      }
-    }
-  }
-}
-    `;
-
-export function useGetAllPokemonsQuery(options?: Omit<Urql.UseQueryArgs<GetAllPokemonsQueryVariables>, 'query'>) {
-  return Urql.useQuery<GetAllPokemonsQuery>({ query: GetAllPokemonsDocument, ...options });
-};
-export const GetPokemonListDocument = gql`
-    query getPokemonList {
-  pokemon_v2_pokemon: pokemon_v2_pokemon(where: {id: {_lte: 478}}) {
-    id
-    name
-    pokemon_v2_pokemontypes {
-      pokemon_v2_type {
-        id
-        name
       }
     }
   }
@@ -51803,6 +51770,52 @@ export const GetPokemonListDocument = gql`
 
 export function useGetPokemonListQuery(options?: Omit<Urql.UseQueryArgs<GetPokemonListQueryVariables>, 'query'>) {
   return Urql.useQuery<GetPokemonListQuery>({ query: GetPokemonListDocument, ...options });
+};
+export const GetPokemonMovesDocument = gql`
+    query getPokemonMoves($pokemonId: Int) {
+  pokemon_v2_move(
+    where: {pokemon_v2_pokemonmoves: {pokemon_id: {_eq: $pokemonId}}}
+  ) {
+    name
+    id
+    accuracy
+    power
+    pp
+    priority
+    pokemon_v2_type {
+      name
+      id
+    }
+  }
+}
+    `;
+
+export function useGetPokemonMovesQuery(options?: Omit<Urql.UseQueryArgs<GetPokemonMovesQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetPokemonMovesQuery>({ query: GetPokemonMovesDocument, ...options });
+};
+export const GetPokemonEvolutionsDocument = gql`
+    query getPokemonEvolutions($pokemonId: Int) {
+  pokemon_v2_pokemonspecies(where: {id: {_eq: $pokemonId}}) {
+    pokemon_v2_evolutionchain {
+      pokemon_v2_pokemonspecies {
+        name
+        id
+        pokemon_v2_pokemons {
+          pokemon_v2_pokemontypes {
+            pokemon_v2_type {
+              name
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useGetPokemonEvolutionsQuery(options?: Omit<Urql.UseQueryArgs<GetPokemonEvolutionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetPokemonEvolutionsQuery>({ query: GetPokemonEvolutionsDocument, ...options });
 };
 export const GetTypesRelationsDocument = gql`
     query getTypesRelations {

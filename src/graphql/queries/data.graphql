@@ -1,5 +1,6 @@
 
-query getAllPokemons {
+
+query getPokemonList {
   pokemon_v2_pokemon: pokemon_v2_pokemon(where: {id: {_lte: 478}}) {
     id
     name
@@ -15,47 +16,44 @@ query getAllPokemons {
         name
       }
     }
-    order
-    pokemon_v2_pokemonspecy {
-      pokemon_v2_evolutionchain {
-        pokemon_v2_pokemonspecies {
-          name
-          id
-          order
-        }
-      }
-    }
     pokemon_v2_pokemonabilities {
       pokemon_v2_ability {
         name
         id
       }
     }
-    pokemon_v2_pokemonmoves {
-      pokemon_v2_move {
-        accuracy
-        id
-        name
-        power
-        pp
-        priority
-        pokemon_v2_type {
-          id
-          name
-        }
-      }
+  }
+}
+
+query getPokemonMoves($pokemonId: Int) {
+  pokemon_v2_move(where: {pokemon_v2_pokemonmoves: {pokemon_id: {_eq: $pokemonId}}}) {
+    name
+    id
+    accuracy
+    power
+    pp
+    priority
+    pokemon_v2_type {
+      name
+      id
     }
   }
 }
 
-query getPokemonList {
-  pokemon_v2_pokemon: pokemon_v2_pokemon(where: {id: {_lte: 478}}) {
-    id
-    name
-    pokemon_v2_pokemontypes {
-      pokemon_v2_type {
-        id
+query getPokemonEvolutions($pokemonId: Int) {
+  pokemon_v2_pokemonspecies(where: {id: {_eq: $pokemonId}}) {
+    pokemon_v2_evolutionchain {
+      pokemon_v2_pokemonspecies {
         name
+        id
+        pokemon_v2_pokemons {
+          pokemon_v2_pokemontypes {
+            pokemon_v2_type {
+              name
+              id
+            }
+          }
+        }
       }
     }
   }

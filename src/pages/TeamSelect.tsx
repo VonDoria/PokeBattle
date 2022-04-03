@@ -6,25 +6,28 @@ import { UserPokemonContext } from "../context/UserPokemonContext";
 import { Pokemon } from "../types/PokemonTypes";
 
 import styles  from '../styles/TeamSelect.module.scss';
+import TeamForm from "../components/TeamForm/TeamForm";
+import PokemonInfos from "../components/PokemonInfos/PokemonInfos";
+import Head from "next/head";
 
 export default function TeamSelect(){
 
-    const { team, trigger, teamNumber } = useContext(UserPokemonContext);
+    const { focus } = useContext(UserPokemonContext);
     const { pokemonList } = useContext(DataContext);
-    const [ pokemonCards, setPokemonCards ] = useState<Pokemon[]>([])
-
-    useEffect(() => {
-        setPokemonCards(team?.map(p => pokemonList[p.id - 1]) || [])
-    }, [trigger])
     
     return(
         <div className={styles.container}>
+            <Head>
+                <title>Pokedex</title>
+                <link rel="shortcut icon" href="pokecatch.png" />
+            </Head>
+            <span>
+                <div className={styles.filter}>
+                    <TeamForm />
+                </div>
+            </span>
             <div className={styles.team}>
-                {Array(teamNumber).fill('').map((x,i)=> {
-                    if(pokemonCards[i]){
-                        return <UserPokemonCard key={`pokemon_card_${i}`} cardId={i} pokemon={pokemonCards[i]} />
-                    }
-                })}
+                {pokemonList[focus - 1] && <PokemonInfos pokemon={pokemonList[focus -1]} />}
             </div>
             <UserPokemonForm />
         </div>

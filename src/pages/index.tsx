@@ -2,17 +2,19 @@ import { GetServerSideProps } from 'next'
 import Link from 'next/link';
 import { useContext, useEffect } from 'react';
 import { DataContext } from '../context/DataContext';
-import { useGetAllPokemonsQuery, GetAllPokemonsDocument, useGetTypesRelationsQuery, GetTypesRelationsDocument } from '../generated/graphql'
+import { useGetPokemonListQuery, GetPokemonListDocument, useGetTypesRelationsQuery, GetTypesRelationsDocument, useGetPokemonEvolutionsQuery, useGetPokemonMovesQuery } from '../generated/graphql'
 import { client, ssrCache } from '../lib/urql'
 import { Pokemon, TypeRelations } from '../types/PokemonTypes';
 import styles from '../styles/Home.module.scss';
+import Head from 'next/head';
 
 
 export default function Home(){  
   const { setPokemonList, setTypeRelations, pokemonList } = useContext(DataContext);
 
-  const [ allPokemonsList ] = useGetAllPokemonsQuery();
+  const [ allPokemonsList ] = useGetPokemonListQuery();
   const [ typeRelationList ] = useGetTypesRelationsQuery();
+
 
   useEffect(() => {
     if(allPokemonsList?.data !== undefined){
@@ -20,7 +22,6 @@ export default function Home(){
         return {
           id: pokemon.id,
           name: pokemon.name,
-          stage: pokemon.order,
           type: pokemon.pokemon_v2_pokemontypes.map(type => { 
             return {
               id: type.pokemon_v2_type?.id,
@@ -33,33 +34,12 @@ export default function Home(){
               baseStatus: stat.base_stat
             }
           }),
-          evolutions: pokemon.pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain?.pokemon_v2_pokemonspecies.map(evolution => {
-            return {
-              id: evolution.id,
-              name: evolution.name,
-              stage: evolution.order
-            }
-          }),
           abilities: pokemon.pokemon_v2_pokemonabilities.map(abilitie => {
             return {
               id: abilitie.pokemon_v2_ability?.id,
               name: abilitie.pokemon_v2_ability?.name
             }
           }),
-          moves: pokemon.pokemon_v2_pokemonmoves.map(move => {
-            return {
-              id: move.pokemon_v2_move?.id,
-              name: move.pokemon_v2_move?.name,
-              accuracy: move.pokemon_v2_move?.accuracy,
-              power: move.pokemon_v2_move?.power,
-              pp: move.pokemon_v2_move?.pp,
-              priority: move.pokemon_v2_move?.priority,
-              type: {
-                id: move.pokemon_v2_move?.pokemon_v2_type?.id,
-                name: move.pokemon_v2_move?.pokemon_v2_type?.name
-              }
-            }
-          })
         }
       });
       setPokemonList(pokemonList);
@@ -87,24 +67,28 @@ export default function Home(){
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Home</title>
+        <link rel="shortcut icon" href="pokecatch.png" />
+      </Head>
       Home page
-      {pokemonList ? (
+      {pokemonList.length > 0 ? (
         <span>
           <Link href="/TeamSelect">TeamSelect</Link>
           <Link href="/FavoriteList">Favorite</Link>
         </span>
-      ) : <img alt='loading' src='../../public/pokeloading.png' />}
+      ) : <img alt='loading' src='pokeloading.png' />}
     </div>
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   await client.query(GetAllPokemonsDocument).toPromise()
-//   await client.query(GetTypesRelationsDocument).toPromise()
+export const getServerSideProps: GetServerSideProps = async () => {
+  await client.query(GetPokemonListDocument).toPromise()
+  await client.query(GetTypesRelationsDocument).toPromise()
 
-//   return {
-//     props: {
-//       urqState: ssrCache.extractData()
-//     }
-//   }
-// }
+  return {
+    props: {
+      urqState: ssrCache.extractData()
+    }
+  }
+}

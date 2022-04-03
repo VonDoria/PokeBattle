@@ -9,53 +9,70 @@
     flex-direction: column;
     align-items: center;
 
-    >span{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-        margin-bottom: .3rem;
-
-        .back{
-            color: #727272;
-            border-radius: 50%;
-            height: 100%;
-            aspect-ratio: 1 / 1;
-            transition: .3s;
-            display: grid;
-            place-items: center;
-            font-size: 1.3rem;
-            cursor: pointer;
-            
-            &:hover{
-                color: #3d3d3d;
-                background-color: #a1a1a16c;
-            }
+    .filterType{
+        overflow-x: auto;
+        max-width: 25vw;
+        padding: .5rem 0;
+        
+        &::-webkit-scrollbar {
+            display: none;
         }
 
-        .next{
-            background-color: #f08030;
-            color: #fefefe;
-            border-radius: 5rem;
-            padding: .5rem 1rem;
-            font-weight: bold;
-            transition: .3s;
-            cursor: pointer;
-
-            &:hover{
-                filter: brightness(1.3);
+        &:hover{
+            
+            &::-webkit-scrollbar {
+                display: initial;
             }
+        }
+        
+        >b{
+            padding: .3rem .8rem;
+            margin: 0 .3rem;
+            border-radius: 50rem;
+            font-size: .9rem;
+            cursor: pointer;
+            transition: .3s;
         }
     }
 
-    >input{
-        outline: none;
+    .filterGeneration{
+        display: flex;
+        justify-content: space-around;
         width: 100%;
-        border: 2px solid #dedede;
-        padding: .5rem;
-        border-radius: 5px;
-        font-weight: bolder;
-        color: #333;
+        margin: .5rem 0;
+
+        >b{
+            padding: .3rem .8rem;
+            border-radius: 50rem;
+            font-size: .9rem;
+            border: solid 1px #444;
+            cursor: pointer;
+            transition: .3s;
+        }
+    }
+
+    .search{
+        display: flex;
+        width: 100%;
+        margin-bottom: .5rem;
+
+        >input{
+            flex: 1;
+            outline: none;
+            width: 100%;
+            border: 2px solid #dedede;
+            padding: .5rem;
+            border-radius: 5px;
+            font-weight: bolder;
+            color: #333;
+        }
+
+        >div{
+            color: #f8d030;
+            font-size: 2rem;
+            display: grid;
+            place-items: center;
+        }
     }
 
     >ul{
@@ -129,11 +146,22 @@
 
 .hide{
     opacity: 0;
-  }
+}
+
+.selected{
+    color: #fefefe;
+    background-color: #4e4e4e;
+    border: none;
+}
 
 .poison{
     color: #fefefe;
     background-color: #a040a0;
+}
+
+.poisonButton{
+    color: #a040a0;
+    border: 2px solid #a040a0;
 }
 
 .grass{
@@ -141,9 +169,19 @@
     background-color: #78c850;
 }
 
+.grassButton{
+    color: #78c850;
+    border: 2px solid #78c850;
+}
+
 .fire{
     color: #fefefe;
     background-color: #f08030;
+}
+
+.fireButton{
+    color: #f08030;
+    border: 2px solid #f08030;
 }
 
 .flying{
@@ -151,9 +189,19 @@
     background-color: #a890f0;
 }
 
+.flyingButton{
+    color: #a890f0;
+    border: 2px solid #a890f0;
+}
+
 .water{
     color: #fefefe;
     background-color: #6890f0;
+}
+
+.waterButton{
+    color: #6890f0;
+    border: 2px solid #6890f0;
 }
 
 .fighting{
@@ -161,9 +209,19 @@
     background-color: #c03028;
 }
 
+.fightingButton{
+    color: #c03028;
+    border: 2px solid #c03028;
+}
+
 .bug{
     color: #fefefe;
     background-color: #a8b820;
+}
+
+.bugButton{
+    color: #a8b820;
+    border: 2px solid #a8b820;
 }
 
 .normal{
@@ -171,9 +229,19 @@
     background-color: #a8a878;
 }
 
+.normalButton{
+    color: #a8a878;
+    border: 2px solid #a8a878;
+}
+
 .rock{
     color: #fefefe;
     background-color: #b8a038;
+}
+
+.rockButton{
+    color: #b8a038;
+    border: 2px solid #b8a038;
 }
 
 .ground{
@@ -181,9 +249,19 @@
     background-color: #e0c068;
 }
 
+.groundButton{
+    color: #e0c068;
+    border: 2px solid #e0c068;
+}
+
 .steel{
     color: #fefefe;
     background-color: #b8b8d0;
+}
+
+.steelButton{
+    color: #b8b8d0;
+    border: 2px solid #b8b8d0;
 }
 
 .electric{
@@ -191,9 +269,19 @@
     background-color: #f8d030;
 }
 
+.electricButton{
+    color: #f8d030;
+    border: 2px solid #f8d030;
+}
+
 .ice{
     color: #fefefe;
     background-color: #98d8d8;
+}
+
+.iceButton{
+    color: #98d8d8;
+    border: 2px solid #98d8d8;
 }
 
 .psychic{
@@ -201,9 +289,19 @@
     background-color: #f85888;
 }
 
+.psychicButton{
+    color: #f85888;
+    border: 2px solid #f85888;
+}
+
 .ghost{
     color: #fefefe;
     background-color: #705898;
+}
+
+.ghostButton{
+    color: #705898;
+    border: 2px solid #705898;
 }
 
 .dragon{
@@ -211,12 +309,27 @@
     background-color: #7038f8;
 }
 
+.dragonButton{
+    color: #7038f8;
+    border: 2px solid #7038f8;
+}
+
 .fairy{
     color: #fefefe;
     background-color: #f0b6bc;
 }
 
+.fairyButton{
+    color: #f0b6bc;
+    border: 2px solid #f0b6bc;
+}
+
 .dark{
     color: #fefefe;
     background-color: #705848;
+}
+
+.darkButton{
+    color: #705848;
+    border: 2px solid #705848;
 }

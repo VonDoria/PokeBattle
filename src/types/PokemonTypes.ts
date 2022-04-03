@@ -9,7 +9,7 @@ type Abilities = {
     name?: string;
 }
 
-type Moves = {
+export type Moves = {
     id?: number;
     name?: string;
     accuracy?: number | null | undefined;
@@ -20,7 +20,7 @@ type Moves = {
 
 }
 
-type Evolutions = {
+export type Evolutions = {
     id: number;
     name: string;
     stage: number | null | undefined;
@@ -34,12 +34,9 @@ type Status = {
 export type Pokemon = {
     id: number;
     name: string;
-    stage: number | null | undefined;
     type: Type[];
-    evolutions: Evolutions[] | null | undefined;
     status: Status[];
     abilities: Abilities[] | null | undefined;
-    moves: Moves[] | null | undefined;
 }
 
 type TypeRelation = {

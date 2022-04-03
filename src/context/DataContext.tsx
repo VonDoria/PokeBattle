@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
+import { useGetPokemonEvolutionsQuery, useGetPokemonMovesQuery } from "../generated/graphql";
 import { Pokemon, TypeRelations } from "../types/PokemonTypes";
 
 
