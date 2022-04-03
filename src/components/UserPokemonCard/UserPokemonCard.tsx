@@ -16,7 +16,7 @@ type UserPokemonCardComponentType = {
 
 export default function UserPokemonCard({ pokemon, cardId }: UserPokemonCardComponentType){
 
-    const { focus, setFocus, teamNumber, team, favorite, isFavorite } = useContext(UserPokemonContext);
+    const { focus, setFocus, teamNumber, favorite, isFavorite, tempTeam } = useContext(UserPokemonContext);
     const { typeRelations } = useContext(DataContext);
     
     function statusIcon(status?: string){
@@ -69,7 +69,7 @@ export default function UserPokemonCard({ pokemon, cardId }: UserPokemonCardComp
     }
 
     return (
-        <span onClick={() => (team?.length === teamNumber && cardId) && setFocus(cardId)} className={`${styles.container} ${cardId === focus && styles.focus}`}>
+        <span onClick={() => (tempTeam.pokemons.length === teamNumber && cardId) && setFocus(cardId)} className={`${styles.container} ${cardId === focus && styles.focus}`}>
             <div className={styles.name}>
                 <img alt={pokemon.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}/>
                 <p>{pokemon.name}</p>
