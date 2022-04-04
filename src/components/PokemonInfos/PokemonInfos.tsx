@@ -79,6 +79,9 @@ export default function PokemonInfos({ pokemon }: PokemonInfosComponentType){
 
     return (
         <div className={styles.container}>
+            <div onClick={() => favorite(pokemon.id)} className={styles.favorite}>
+                {isFavorite(pokemon.id) ? <AiFillStar /> : <AiOutlineStar />}
+            </div>
             <div className={styles.name}>
                 <img alt={pokemon.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}/>
                 <p>{pokemon.name}</p>
@@ -104,10 +107,8 @@ export default function PokemonInfos({ pokemon }: PokemonInfosComponentType){
                     )
                 })}
             </div>
-            <div onClick={() => favorite(pokemon.id)} className={styles.favorite}>
-                {isFavorite(pokemon.id) ? <AiFillStar /> : <AiOutlineStar />}
-            </div>
             <div className={styles.movesSelect}>
+                <p>Moves</p>
                 <div className={styles.moves}>
                     {tempPokemonTeam.moves.map((moveId, index) => {
                         const move = pokemonMoves.find(m => m.id == moveId);

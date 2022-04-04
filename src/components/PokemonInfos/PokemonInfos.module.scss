@@ -2,11 +2,10 @@
 .container{
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 5fr 5fr 1fr;
-    grid-template-rows: 4fr 8fr;
-    place-items: center;
-    padding: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: .3rem;
+    overflow: hidden;
     
     >div{
         display: flex;
@@ -15,14 +14,13 @@
     }
     
     .name{
-        width: 10rem;
-        
+        width: 45%;        
         >p{
             text-transform: capitalize;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bolder;
             color: #333;
-            margin-bottom: 1rem;
+            margin-bottom: .5rem;
         }
         
         >span{
@@ -33,7 +31,6 @@
                 border-radius: 50rem;
                 text-transform: capitalize;
                 margin: .3rem;
-                font-size: 1.3rem;
                 font-weight: bold;
             }
         }
@@ -44,8 +41,8 @@
     }
     
     .status{
-        width: 100%;
-        margin: 0 1rem;
+        width: 45%;
+        margin: 1rem;
         
         >span{
             width: 100%;
@@ -80,19 +77,19 @@
     
     .favorite{
         color: #f8d030;
-        margin-bottom: auto;
+        width: 100%;
         font-size: 3rem;
-        cursor: pointer;
+        
+        >svg{
+            margin-left: auto;
+            cursor: pointer;
+        }
     }
 
     .movesSelect{
-        grid-column: 1 / 4;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         width: 100%;
-        height: 100%;
-        overflow-y: auto;
 
         >input{
             outline: none;
@@ -106,10 +103,10 @@
         }
 
         >span{
-            width: 100%;
-            overflow-y: auto;
+            max-width: 50vw;
             display: flex;
-            flex-wrap: wrap;
+            overflow-y: hidden;
+            overflow-x: auto;
 
             >div{
                 padding: .5rem 1rem;
@@ -118,6 +115,7 @@
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
+                min-width: max-content;
 
                 &:hover{
                     filter: brightness(1) opacity(1);
@@ -149,6 +147,31 @@
             }
         }
     
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+
+        .name{
+            width: 100%;
+        }
+
+        .status{
+            width: 100%;
+            margin: .5rem 0;
+        }
+
+        .movesSelect{
+            >span{
+                overflow-y: hidden;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                max-width: 90vw;
+            }
+        }
     }
 }
 

@@ -22,9 +22,7 @@ export default function TeamSelect(){
                 <link rel="shortcut icon" href="pokecatch.png" />
             </Head>
             <span>
-                <div className={styles.filter}>
-                    <TeamForm />
-                </div>
+                <TeamForm />
             </span>
             <div className={styles.team}>
                 {pokemonList[focus - 1] && <PokemonInfos pokemon={pokemonList[focus -1]} />}

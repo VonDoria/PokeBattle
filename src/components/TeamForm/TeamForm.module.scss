@@ -61,61 +61,67 @@
             margin-bottom: .5rem;
         }
 
-        >span{
-            margin: .3rem 0;
+        >.teamCardsContainer{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 3px solid #dfdfdf;
-            border-radius: 8px;
-            padding: .5rem;
-            transition: .3s;
-            cursor: pointer;
+            flex-direction: column;
 
-            >img{
-                height: 3rem;
-            }
-
-            >b{
-                text-transform: capitalize;
-                color: #646464;
-            }
-
-            >button{
-                border: none;
-                background-color: transparent;
-                padding: 0 .3rem;
-                border-left: 1px solid #dedede;
-                display: grid;
-                place-items: center;
-                color: #dedede;
+            >span{
+                margin: .3rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 3px solid #dfdfdf;
+                border-radius: 8px;
+                padding: .5rem;
                 transition: .3s;
                 cursor: pointer;
-
-            }
-
-            .add{
-                background-color: #359b2c;
-                font-weight: bold;
-                border-radius: 5rem;
-                padding: .2rem .5rem;
-
-                &:hover{
-                    filter: brightness(1.2);
+    
+                >img{
+                    height: 3rem;
                 }
-            }
-
-            .remove{
-                height: 100%;
-
-                &:hover{
-                    border-left: 1px solid #a8a8a8;
-                    color: #a8a8a8;
+    
+                >b{
+                    text-transform: capitalize;
+                    color: #646464;
+                    margin-right: .5rem;
                 }
-            }
-
-            &:hover{
-                transform: scale(1.05);
+    
+                >button{
+                    border: none;
+                    background-color: transparent;
+                    padding: 0 .3rem;
+                    border-left: 1px solid #dedede;
+                    display: grid;
+                    place-items: center;
+                    color: #dedede;
+                    transition: .3s;
+                    cursor: pointer;
+    
+                }
+    
+                .add{
+                    background-color: #359b2c;
+                    font-weight: bold;
+                    border-radius: 5rem;
+                    padding: .2rem .5rem;
+    
+                    &:hover{
+                        filter: brightness(1.2);
+                    }
+                }
+    
+                .remove{
+                    height: 100%;
+    
+                    &:hover{
+                        border-left: 1px solid #a8a8a8;
+                        color: #a8a8a8;
+                    }
+                }
+    
+                &:hover{
+                    transform: scale(1.05);
+                }
             }
         }
     }
@@ -123,4 +129,11 @@
 
 .active{
     border: 3px solid #359b2c !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .teamCardsContainer{
+        flex-direction: row !important;
+        overflow-x: auto;
+    }
 }

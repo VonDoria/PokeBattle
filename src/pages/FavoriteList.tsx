@@ -1,6 +1,5 @@
-import Link from "next/link";
+import Head from "next/head";
 import { useContext } from "react";
-import { FaArrowLeft } from "react-icons/fa";
 import UserPokemonCard from "../components/UserPokemonCard/UserPokemonCard";
 import { DataContext } from "../context/DataContext"
 import { UserPokemonContext } from "../context/UserPokemonContext";
@@ -13,9 +12,10 @@ export default function FavoriteList(){
 
     return (
         <div className={styles.container}>
-            <span className={styles.back}>
-                <Link href="/"><FaArrowLeft /></Link>
-            </span>
+            <Head>
+                <title>Favorite</title>
+                <link rel="shortcut icon" href="pokecatch.png" />
+            </Head>
             {favoriteList().map((pokemonId, index) => {
                 return <UserPokemonCard key={`pokemon_favorite_card_${index}`} pokemon={pokemonList[pokemonId - 1]} />
             })}
